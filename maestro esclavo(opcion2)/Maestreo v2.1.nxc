@@ -1,0 +1,84 @@
+#include "NXCDefs.h"
+#define ENTRADA 1
+#define SALIDA  5
+    sub no_conexion (int nel){
+    if (!BluetoothStatus(nel)==NO_ERR){
+    TextOut(5,LCD_LINE2,"Donde quedo mi esclavo?");
+    Wait(2000);
+    Stop(true);}
+    }
+
+
+task main()
+{
+int s1;
+int s2;
+int s3;
+int s4;
+SetSensorTouch(IN_1);
+SetSensorTouch(IN_2);
+SetSensorTouch(IN_3);
+SetSensorTouch(IN_4);
+while (true){
+ no_conexion (1);
+s1= Sensor(IN_1);
+s2= Sensor(IN_2);
+s3= Sensor(IN_3);
+s4= Sensor(IN_4);
+   if (s1==1 && s3==1){
+   SendRemoteNumber(1,SALIDA,9);
+   }
+   if (s2==1 && s4==1){
+   SendRemoteNumber(1,SALIDA,8);
+   }
+   if (s3==1 && s2==1){
+   SendRemoteNumber(1,SALIDA,7);
+   }
+   if (s1==1 && s4==1){
+   SendRemoteNumber(1,SALIDA,6);
+   }
+   if (s1==1){
+   SendRemoteNumber(1,SALIDA,5);
+   }
+   if (s2==1){
+   SendRemoteNumber(1,SALIDA,4);
+   }
+   if (s3==1){
+   SendRemoteNumber(1,SALIDA,3);
+   }
+   if (s4==1){
+   SendRemoteNumber(1,SALIDA,2);
+   }
+   if (s1==0 && s2==0 && s3==0 && s4==0 ){
+   SendRemoteNumber(1,SALIDA,1);
+   }
+   
+
+
+Wait(50);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
